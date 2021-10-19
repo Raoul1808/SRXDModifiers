@@ -24,6 +24,7 @@ namespace SRXDModifiers
             Logger = Log;
             Harmony harmony = new Harmony(MOD_ID);
             harmony.PatchAll<Mod>();
+            harmony.PatchAll<ModifiersCustomUI>();
         }
 
         [HarmonyPatch(typeof(Game), nameof(Game.Update)), HarmonyPostfix]
