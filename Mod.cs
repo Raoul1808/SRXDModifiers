@@ -5,9 +5,11 @@ using HarmonyLib;
 
 namespace SRXDModifiers
 {
-    [BepInPlugin("useredge.srxdmodifiers", "SRXD Modifiers Mod", "0.1.0")]
+    [BepInPlugin(MOD_ID, "SRXD Modifiers Mod", "0.1.0")]
     public class Mod : BasePlugin
     {
+        public const string MOD_ID = "useredge.srxdmodifiers";
+
         private static bool isPlayingTrack = false;
         private static bool canToggle = true;
         private static bool isInBaseGame = false;
@@ -20,7 +22,8 @@ namespace SRXDModifiers
         public override void Load()
         {
             Logger = Log;
-            Harmony.CreateAndPatchAll(typeof(Mod));
+            Harmony harmony = new Harmony(MOD_ID);
+            harmony.PatchAll<Mod>();
         }
 
         [HarmonyPatch(typeof(Game), nameof(Game.Update)), HarmonyPostfix]
